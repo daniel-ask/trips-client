@@ -1,34 +1,38 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import HomeIcon from "@material-ui/icons/Home";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import AirlineSeatReclineExtraIcon from "@material-ui/icons/AirlineSeatReclineExtra";
-import BathtubIcon from "@material-ui/icons/Bathtub";
 import { Link } from "react-router-dom";
-import { DanNav } from "../styled-components/StyledComponents";
+// import { DanNav } from "../styled-components/StyledComponents";
 import { AuthContext } from "../contexts/AuthProvider";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import EnhancedEncryptionOutlinedIcon from "@material-ui/icons/EnhancedEncryptionOutlined";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: 500,
+    flexGrow: 1,
   },
-});
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
 export default function NavigationBar() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
   const [auth, setAuth] = useContext(AuthContext);
-  const signOut = () =>{
-    localStorage.removeItem('token')
-    localStorage.removeItem('username')
+  const signOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
     setAuth({
       loggedIn: false,
-      username: null
-    })
-  }
+      username: null,
+    });
+  };
 
   return (
     // <BottomNavigation
@@ -52,7 +56,47 @@ export default function NavigationBar() {
     //     <BottomNavigationAction label="Sign Up" icon={<BathtubIcon />} />
     //   </Link>
     // </BottomNavigation>
-    <DanNav>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          Trips
+        </Typography>
+        {auth.loggedIn ? (
+          <>
+            <Typography variant="subtitle1">
+              Logged in as: {auth.username}
+            </Typography>
+            <Button color="inherit" onClick={signOut}>
+            Sign out
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              color="inherit"
+              startIcon={<LockOutlinedIcon />}
+              component={Link}
+              to="/login"
+            >
+              Login
+            </Button>
+            <Button
+              color="inherit"
+              startIcon={<EnhancedEncryptionOutlinedIcon />}
+              component={Link}
+              to="/sign-up"
+            >
+              Sign Up
+            </Button>
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
+  );
+}
+
+
+  /* <DanNav>
       <Link to="/">Home</Link>
       {auth.loggedIn ? (
         <>
@@ -65,6 +109,5 @@ export default function NavigationBar() {
           <Link to="/sign-up">Sign Up</Link>
         </>
       )}
-    </DanNav>
-  );
-}
+    </DanNav> */
+

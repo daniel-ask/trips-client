@@ -1,22 +1,34 @@
-import React, {useContext} from 'react'
-import { AuthContext } from '../contexts/AuthProvider';
-import { makeStyles } from '@material-ui/core/styles';
-import { Container, Link, CssBaseline, Avatar, Typography, Button, Checkbox, TextField, Grid, FormControlLabel, Box } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import React, { useContext } from "react";
+import { AuthContext } from "../contexts/AuthProvider";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Container,
+  Link,
+  CssBaseline,
+  Avatar,
+  Typography,
+  Button,
+  Checkbox,
+  TextField,
+  Grid,
+  FormControlLabel,
+  Box,
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -25,12 +37,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home() {
-	const [auth, setAuth] = useContext(AuthContext);
+  const [auth, setAuth] = useContext(AuthContext);
 
-	const classes = useStyles();
+  const classes = useStyles();
 
-	return (
-<Container component="main" maxWidth="xs">
+  return (
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -89,16 +101,14 @@ export default function Home() {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        {/* <Copyright /> */}
-      </Box>
-		{/* <Container maxWidth='sm'>
+      <Box mt={8}>{/* <Copyright /> */}</Box>
+      {/* <Container maxWidth='sm'>
 				{auth.loggedIn ? (
-					<div>
+					<div style={{textAlign: 'center'}}>
 					<h1>LOGGED IN</h1>
 					<h2>Welcome {auth.username}</h2>
 					</div>
-					) : <h1> NOT LOGGED IN</h1>} */}
-		</Container>
-	)
+					) : <h1 style={{textAlign: 'center'}}> NOT LOGGED IN</h1>} */}
+    </Container>
+  );
 }
