@@ -6,16 +6,14 @@ import NavigationBar from "./NavigationBar";
 
 function App() {
   return (
-    <>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/sign-up" exact component={SignUp} />
+      </Switch>
       <NavigationBar />
-      <Router>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/sign-up" exact component={SignUp} />
-        </Switch>
-      </Router>
-    </>
+    </Router>
   );
 }
 
