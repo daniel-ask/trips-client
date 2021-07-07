@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 // import { DanNav } from "../styled-components/StyledComponents";
-import { AuthContext } from "../contexts/AuthProvider";
+import { useAuth } from "../contexts/AuthProvider";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -24,16 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavigationBar() {
   const classes = useStyles();
-  const [auth, setAuth] = useContext(AuthContext);
-  const signOut = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    setAuth({
-      loggedIn: false,
-      username: null,
-    });
-  };
-
+  const { auth, authDispatch } = useAuth();
+  
   return (
     // <BottomNavigation
     //   value={value}
@@ -66,7 +58,7 @@ export default function NavigationBar() {
             <Typography variant="subtitle1">
               Logged in as: {auth.username}
             </Typography>
-            <Button color="inherit" onClick={signOut}>
+            <Button color="inherit" onClick={() => authDispatch({ type: 'sign-out' })}>
             Sign out
             </Button>
           </>

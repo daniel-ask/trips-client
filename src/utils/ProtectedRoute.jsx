@@ -1,9 +1,9 @@
-import React, {useContext} from 'react'
-import { AuthContext } from "../contexts/AuthProvider";
+import React from 'react'
+import { useAuth } from "../contexts/AuthProvider";
 import {Redirect, Route} from 'react-router-dom';
 
 export default function ProtectedRoute({ component: Comp, path, ...rest }) {
-  const [auth] = useContext(AuthContext)
+  const { auth } = useAuth()
 
 	if(auth.loggedIn){
 		return(

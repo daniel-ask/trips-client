@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { AuthContext } from "../contexts/AuthProvider";
+import { useAuth } from "../contexts/AuthProvider";
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login({ history }) {
   const classes = useStyles();
 
-  const [auth, setAuth] = useContext(AuthContext);
+  const {auth, authDispatch} = useAuth();
 
   const changeInput = (e) => {
     setLoginForm({
@@ -77,15 +77,8 @@ export default function Login({ history }) {
 
     const data = await response.json();
     if (data.token) {
-      localStorage.setItem("token", data.token);
-			localStorage.setItem('username', data.username)
-      setAuth({
-        ...auth,
-        username: data.username,
-        email: data.email,
-        loggedIn: true,
-      });
-      history.push("/");
+      authDispatch({ type: 'login', token: data.token, value: data})
+      history.push("/dashboard");
     } else {
       setErrorMessage(data.error);
     }
