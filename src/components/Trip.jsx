@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { fetchData, updateRequest } from "../utils/apiRequest";
 import EditableField from "./EditableField";
 
 export default function Trip({ match }) {
   const [trip, setTrip] = useState({});
 
-  const fetchTrip = async () => {
+  const fetchTrip =  useCallback(async () => {
     const data = await fetchData(
       `http://localhost:3000/trips/${match.params.id}`
     );
     setTrip(data);
-  };
+  },[match.params.id]);
 
   const updateData = (attributeName, newValue) => {
     console.log(newValue);
@@ -24,7 +24,7 @@ export default function Trip({ match }) {
 
   useEffect(() => {
     fetchTrip();
-  }, []);
+  }, [fetchTrip]);
 
   return (
     <div>
