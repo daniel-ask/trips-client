@@ -14,7 +14,8 @@ const reducer = (state, action) => {
 				...state,
 				loggedIn: true,
 				username: action.value.username,
-				email: action.value.email
+				email: action.value.email,
+        profile_pic: action.value.profile_pic
 			};
     case "sign-out":
 			localStorage.removeItem('token');

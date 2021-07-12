@@ -36,6 +36,7 @@ export default function Dashboard() {
   return (
     <div>
       <h1 style={titleStyle}>Dashboard</h1>
+      <img src="" alt="" />
       <ul>
         {trips.map((trip) => (
           <li key={trip.id}>

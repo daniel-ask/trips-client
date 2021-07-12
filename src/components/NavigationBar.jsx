@@ -55,6 +55,7 @@ export default function NavigationBar() {
         </Typography>
         {auth.loggedIn ? (
           <>
+            <img src={auth.profile_pic} alt={auth.username} srcset="" style={{width: '50px', borderRadius: '50%', height:'50px'}}/>
             <Typography variant="subtitle1">
               Logged in as: {auth.username}
             </Typography>

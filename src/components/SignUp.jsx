@@ -69,14 +69,14 @@ export default function SignUp({ history }) {
     });
   };
 
-  const postSignUp = async () => {
-    console.log(process.env.REACT_APP_API_URL);
+  const postSignUp = async (event) => {
+    const formData = new FormData(event.target);
     const response = await fetch(process.env.REACT_APP_API_URL + "/sign-up", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Accept": "application/json",
       },
-      body: JSON.stringify(signUpForm),
+      body: formData ,
     });
 
     const data = await response.json();
@@ -90,7 +90,7 @@ export default function SignUp({ history }) {
 
   const signUpUser = (e) => {
     e.preventDefault();
-    postSignUp();
+    postSignUp(e);
   };
 
   const { username, email, password, password_confirmation } = signUpForm.user;
@@ -159,6 +159,7 @@ export default function SignUp({ history }) {
             value={password_confirmation}
             onChange={changeInput}
           />
+          <input type="file" name="profile_pic" id="profile_pic" accept='image/*' />
           <Button
             type="submit"
             fullWidth
