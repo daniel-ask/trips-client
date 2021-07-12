@@ -7,7 +7,7 @@ export default function Trip({ match }) {
 
   const fetchTrip =  useCallback(async () => {
     const data = await fetchData(
-      `http://localhost:3000/trips/${match.params.id}`
+      `${process.env.REACT_APP_API_URL}/trips/${match.params.id}`
     );
     setTrip(data);
   },[match.params.id]);
@@ -19,7 +19,7 @@ export default function Trip({ match }) {
         [attributeName]: newValue,
       },
     };
-    updateRequest(`http://localhost:3000/trips/${trip.id}`, updatedData);
+    updateRequest(`${process.env.REACT_APP_API_URL}/trips/${trip.id}`, updatedData);
   };
 
   useEffect(() => {

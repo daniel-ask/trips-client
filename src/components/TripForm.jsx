@@ -22,7 +22,7 @@ export default function TripForm(props) {
 
 	const createNewTrip = (event) =>{
 		event.preventDefault();
-		postData('http://localhost:3000/trips',tripForm)
+		postData(process.env.REACT_APP_API_URL + '/trips',tripForm)
 		setTripForm(formInitialState)
 		props.update.setUpdate(!props.update.update)
 	}

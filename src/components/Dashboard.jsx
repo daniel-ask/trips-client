@@ -14,7 +14,7 @@ export default function Dashboard() {
   const [update, setUpdate] = useState(false);
 
   const fetchTrips = async () => {
-    const response = await fetch("http://localhost:3000/trips", {
+    const response = await fetch(process.env.REACT_APP_API_URL + "/trips", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -24,7 +24,7 @@ export default function Dashboard() {
   };
 
 	const deleteTrip = (tripId) =>{
-		deleteRequest(`http://localhost:3000/trips/${tripId}`)
+		deleteRequest(`${process.env.REACT_APP_API_URL}/trips/${tripId}`)
 		
 		setUpdate(!update);
 	}

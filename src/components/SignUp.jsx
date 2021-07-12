@@ -70,7 +70,7 @@ export default function SignUp({ history }) {
   };
 
   const postSignUp = async () => {
-    const response = await fetch("http://localhost:3000/sign-up", {
+    const response = await fetch(process.env.REACT_APP_API_URL + "/sign-up", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
