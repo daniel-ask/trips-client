@@ -1,14 +1,16 @@
 describe("Login", () => {
-	beforeEach(() => {
-    cy.visit("http://localhost:8080");
-    cy.contains("Login").click();
+  beforeEach(() => {
+    cy.visit("/login");
+    // cy.contains("Login").click();
 
-    cy.url().should("include", "/login");
+    // cy.url().should("include", "/login");
 
     cy.get("#username").type("hello").should("have.value", "hello");
-    cy.get("#password").type("hello").should("have.value", "hello").should('have.attr', 'type', 'password');
-
-	})
+    cy.get("#password")
+      .type("hello")
+      .should("have.value", "hello")
+      .should("have.attr", "type", "password");
+  });
 
   it("login in with correct credentials", () => {
     cy.intercept("POST", "/login", {
@@ -32,17 +34,17 @@ describe("Login", () => {
 
     cy.url().should("include", "/dashboard");
     cy.get("h1").should("contain", "Dashboard");
-		cy.get('h6').should('contain', 'hello')
+    cy.get("h6").should("contain", "hello");
   });
 
-	it('should show an error when logged in with wrong credentials', () => {
-		cy.intercept('POST', '/login', {
-			statusCode: 400,
-			body: {
-				error: 'Invalid username or password'
-			}
-		})
+  it("should show an error when logged in with wrong credentials", () => {
+    cy.intercept("POST", "/login", {
+      statusCode: 400,
+      body: {
+        error: "Invalid username or password",
+      },
+    });
     cy.get("button").contains("Login").click();
-		cy.get('h1').should('contain', 'Invalid username or password')
-	})
+    cy.get("h1").should("contain", "Invalid username or password");
+  });
 });

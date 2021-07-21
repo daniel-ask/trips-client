@@ -1,9 +1,11 @@
 describe("Trips", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:8080/login");
-    cy.get("#username").type("ask");
-    cy.get("#password").type("qwerty");
-    cy.get("button").contains("Login").click();
+    // cy.visit("http://localhost:8080/login");
+    // cy.get("#username").type("ask");
+    // cy.get("#password").type("qwerty");
+    // cy.get("button").contains("Login").click();
+    cy.login()
+    cy.visit("dashboard")
   });
   it("should have a trip", () => {
     cy.get("a").should("contain", "Trip 0");
